@@ -1,1 +1,32 @@
-55555,Timer,10,integrated Circuit,This is a 555 timer
+====================================
+Part Number : UPN-175151
+Name        : EVEREADY
+Quantity    : 10
+Category    : Battery
+Description : 9volts Battery
+====================================
+
+====================================
+Part Number : 2
+Name        : HB pencil
+Quantity    : 19
+Category    : Pencil
+Description : Graphite Pencil
+====================================
+
+====================================
+Part Number :  17
+Name        : Oliver
+Quantity    : 1
+Category    : Human
+Description : Human Oliver
+====================================
+
+====================================
+Part Number : 18
+Name        : Ledesma
+Quantity    : 1
+Category    : Human
+Description : Human Ledesma
+====================================
+
