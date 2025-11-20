@@ -78,15 +78,21 @@ public final class Inventory {
         //Constructs a FileWriter given a file name, using the default charset
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_NAME))){
 
+            if (partsList.isEmpty()){
+                System.out.println("No parts in Inventory.");
+            } else {
             for (Part part: partsList){
-                writer.println(part.getPartNumber() + ", " +
-                               part.getName() + ", " + 
-                               part.getQuantity() + ", " +
-                               part.getCategory() + ", " +
-                               part.getDescription()
-                               );
+                writer.println("====================================");
+                writer.println("Part Number : " + part.getPartNumber());
+                writer.println("Name        : " + part.getName());
+                writer.println("Quantity    : " + part.getQuantity());
+                writer.println("Category    : " + part.getCategory());
+                writer.println("Description : " + part.getDescription());
+                writer.println("====================================\n");
+            }
                 System.out.println("Inventory saved to file as text.");
             }
+        
         } catch (IOException e) {
             System.out.println("Error saving inventory: " + e.getMessage());
         }
