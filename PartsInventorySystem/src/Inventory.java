@@ -27,6 +27,7 @@ public final class Inventory {
         } else {
             for (Part part : partsList){
                 System.out.println(part);
+                System.out.println("------------------------------------");
             }
         }
     }
@@ -54,7 +55,7 @@ public final class Inventory {
         Part part = searchPart(partNumber);
         if (part != null){
             part.setQuantity(newQuantity);
-            System.out.println("Quantity updated.");
+            System.out.println("Quantity updated for " + part.getName());
         }else{
             System.out.println("Part not found.");
         }
@@ -65,7 +66,7 @@ public final class Inventory {
         Part part = searchPart(partNumber);
         if (part != null){
             partsList.remove(part);
-            System.out.println("Part deleted.");
+            System.out.println("Part deleted." + part.getName());
         }else{
             System.out.println("Part not found.");
         }
@@ -81,7 +82,7 @@ public final class Inventory {
             if (partsList.isEmpty()){
                 System.out.println("No parts in Inventory.");
             } else {
-            for (Part part: partsList){
+            for (Part part : partsList){
                 writer.println("====================================");
                 writer.println("Part Number : " + part.getPartNumber());
                 writer.println("Name        : " + part.getName());
@@ -90,15 +91,14 @@ public final class Inventory {
                 writer.println("Description : " + part.getDescription());
                 writer.println("====================================\n");
             }
-                System.out.println("Inventory saved to file as text.");
+                System.out.println("Inventory saved Successfully!.");
             }
-        
         } catch (IOException e) {
             System.out.println("Error saving inventory: " + e.getMessage());
         }
     }
 
-    //load from file
+    //load inv from file
     public void loadFromFile(){
         partsList = new ArrayList<>();
 
@@ -108,37 +108,50 @@ public final class Inventory {
             return;
         }
 
-        try {
-            // Ensure parent directories exist
-            file.getParentFile().mkdirs();
-
-            // Create a new empty file if it does not exist
-            if (file.createNewFile()) {
-                System.out.println("New inventory file created at: " + file.getAbsolutePath());
-                return;
-            }
-        } catch (IOException e) {
-            System.out.println("Error creating new inventory file: " + e.getMessage());
-            return;
-        }
-
         /*BufferedReader: Reads text from a character-input stream, 
         buffering characters so as to provide for the efficient reading 
         of characters, arrays, and lines. */
+        //FileReader: opens the file
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_NAME))) {
+           //create temporary variables to hold part data
+           //collect data line by line
             String line;
+            String partNumber = null, name = null, category = null, description = null;
+            int quantity = 0;
 
+            //br.readline: will read one line at a time
+            //loop continues until readLine() returns null(end of file)
+            //line.trim(): removes leading and trailing whitespace
             while ((line = br.readLine()) != null){
-                String[] data = line.split(", ");
-                if (data.length == 5){
+                line = line.trim();
 
-                    String partNumber = data[0];
-                    String name = data[1];
-                    int quantity = Integer.parseInt(data[2]);
-                    String category = data[3];
-                    String description = data[4];
+                //check what each line starts with and extract data accordingly
+                //line,startsWith(): check what kind of data the line contains
+                //substring(): extracts the actual data by removing the label part
+                //integer.parseInt(): converts string to integer
 
-                    partsList.add(new Part(name, partNumber, quantity, category, description));
+                /*line.startsWith("=====") identifies the separator line in your formatted file. 
+                This means we finished reading one part. If all fields are not null, 
+                we create a Part object and add it to partsList.
+                Then we reset the temporary variables to be ready 
+                 for the next part. */
+                if(line.startsWith("Part Number: ")){
+                    partNumber = line.substring("Part Number: ".length());
+                } else if (line.startsWith("Name:        ")){
+                    name = line.substring("Name:        ".length());
+                } else if (line.startsWith("Quantity    : ")){
+                    quantity = Integer.parseInt(line.substring("Quantity    : ".length()));
+                } else if (line.startsWith("Category    : ")) {
+                    category = line.substring("Category    : ".length());
+                } else if (line.startsWith("Description : ")) {
+                    description = line.substring("Description : ".length());
+                } else if (line.startsWith("=====")) {
+                    //end part of block, add to list if all fields exist
+                    if (partNumber != null && name != null && category != null && description != null){
+                            partsList.add(new Part(name, partNumber, quantity, category, description));
+                            partNumber = name = category = description = null;
+                            quantity = 0;
+                        }
                 }
             }
             System.out.println("Inventory loaded from file.");
