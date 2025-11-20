@@ -51,7 +51,7 @@ public class Part implements Serializable {
     @Override
     //toString for easy product display
     public String toString(){
-        return String.format("Name: %s, Part Number: %s, Quantity: %d, Categgory: %s, Description: %s",
+        return String.format("Name: %s, Part Number: %s, Quantity: %d, Category: %s, Description: %s",
                              name, partNumber, quantity, category, description);
     }
 
