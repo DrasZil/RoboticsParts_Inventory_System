@@ -1,0 +1,1 @@
+55555,Timer,10,integrated Circuit,This is a 555 timer
