@@ -6,17 +6,19 @@ public class Part implements Serializable {
     private final String name;
     private final String partNumber;
     private int quantity;
+    private int price;
     private final String category;
     private final String description;
 
     //creating a constrctor
     //local parameters inside Part()
     //"this." Assigns parameter to the instance variables
-    public Part(String name, String partNumber, int quantity, 
+    public Part(String name, String partNumber, int price, int quantity, 
                 String category, String description){
                     this.name = name;
                     this.partNumber = partNumber;
                     this.quantity = quantity;
+                    this.price = price;
                     this.category = category;
                     this.description = description;
                 }
@@ -39,6 +41,14 @@ public class Part implements Serializable {
         return this.quantity = quantity;
     }
 
+    public int getPrice(){
+        return price;
+    }
+
+    public int setPrice(int price){
+        return this.price = price;
+    }
+
     public String getCategory(){
         return category;
     }
@@ -51,8 +61,8 @@ public class Part implements Serializable {
     @Override
     //toString for easy product display
     public String toString(){
-        return String.format("Name: %s, Part Number: %s, Quantity: %d, Category: %s, Description: %s",
-                             name, partNumber, quantity, category, description);
+        return String.format("Name: %s, Part Number: %s, Quantity: %d, Price: %d, Category: %s, Description: %s",
+                            name, partNumber, quantity, price, category, description);
     }
 
 }
