@@ -12,7 +12,7 @@ public class Main {
             System.out.print("""
                                
                             Robotics Parts Inventory System
-                               1. Add Part
+                                1. Add Part
                                2. View All Parts
                                3. Search Part
                                4. Update Quantity
@@ -31,13 +31,15 @@ public class Main {
                     String partNumber = input.nextLine();
                     System.out.print("Enter Quantity: ");
                     int quantity = input.nextInt();
+                    System.out.print("Enter Price: ");
+                    int price = input.nextInt();
                     input.nextLine();
                     System.out.print("Enter Category: ");
                     String category = input.nextLine();
                     System.out.print("Enter Description: ");
                     String description = input.nextLine();
 
-                    inventory.addPart(new Part(name, partNumber, quantity, category, description));
+                    inventory.addPart(new Part(name, partNumber, quantity, price, category, description));
                 }
                 case 2 -> inventory.viewAllParts();
                 case 3 -> {
