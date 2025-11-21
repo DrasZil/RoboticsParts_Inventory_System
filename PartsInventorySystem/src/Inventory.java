@@ -17,7 +17,7 @@ public final class Inventory {
     //Adding a part
     public void addPart(Part part){
         partsList.add(part);
-        System.out.println("Part added: ");
+        System.out.println("Part added: " + part.getName());
     }
 
     //View all parts
@@ -87,6 +87,7 @@ public final class Inventory {
                 writer.println("Part Number : " + part.getPartNumber());
                 writer.println("Name        : " + part.getName());
                 writer.println("Quantity    : " + part.getQuantity());
+                writer.println("Price       : " + part.getPrice());
                 writer.println("Category    : " + part.getCategory());
                 writer.println("Description : " + part.getDescription());
                 writer.println("====================================\n");
@@ -117,6 +118,7 @@ public final class Inventory {
            //collect data line by line
             String line;
             String partNumber = null, name = null, category = null, description = null;
+            int price = 0;
             int quantity = 0;
 
             //br.readline: will read one line at a time
@@ -141,6 +143,8 @@ public final class Inventory {
                     name = line.substring("Name:        ".length());
                 } else if (line.startsWith("Quantity    : ")){
                     quantity = Integer.parseInt(line.substring("Quantity    : ".length()));
+                } else if (line.startsWith("Price       : ")){
+                    price = Integer.parseInt(line.substring("Price       : ".length()));
                 } else if (line.startsWith("Category    : ")) {
                     category = line.substring("Category    : ".length());
                 } else if (line.startsWith("Description : ")) {
@@ -148,9 +152,10 @@ public final class Inventory {
                 } else if (line.startsWith("=====")) {
                     //end part of block, add to list if all fields exist
                     if (partNumber != null && name != null && category != null && description != null){
-                            partsList.add(new Part(name, partNumber, quantity, category, description));
+                            partsList.add(new Part(name, partNumber, quantity, price, category, description));
                             partNumber = name = category = description = null;
                             quantity = 0;
+                            price = 0;
                         }
                 }
             }
