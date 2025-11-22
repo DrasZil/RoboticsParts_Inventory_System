@@ -81,8 +81,7 @@ public class Main {
                 }
                 case 6 -> {
                     System.out.println("This is a preview of the parts to be added to the Main Inventory");
-                    inventory.prev14iew();
-
+                    inventory.preview();
 
                 }
                 case 7 -> {
