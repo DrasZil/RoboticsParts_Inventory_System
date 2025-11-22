@@ -151,10 +151,10 @@ public final class Inventory {
                 we create a Part object and add it to partsList.
                 Then we reset the temporary variables to be ready 
                  for the next part. */
-                if(line.startsWith("Part Number: ")){
-                    partNumber = line.substring("Part Number: ".length());
-                } else if (line.startsWith("Name:        ")){
-                    name = line.substring("Name:        ".length());
+                if(line.startsWith("Part Number : ")){
+                    partNumber = line.substring("Part Number : ".length());
+                } else if (line.startsWith("Name        : ")){
+                    name = line.substring("Name        : ".length());
                 } else if (line.startsWith("Quantity    : ")){
                     quantity = Integer.parseInt(line.substring("Quantity    : ".length()));
                 } else if (line.startsWith("Price       : ")){
