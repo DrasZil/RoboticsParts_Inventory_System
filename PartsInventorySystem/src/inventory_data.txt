@@ -1,18 +1,8 @@
-<<<<<<< HEAD
-====================================
-Part Number : 67
-Name        : chicken
-Quantity    : 120
-Price       : 67
-Category    : food
-Description : delisyoso chicken
-====================================
-
 ====================================
 Part Number : 67
 Name        : Tom
-Quantity    : 670000000
-Price       : 1
+Quantity    : 1
+Price       : 670000000
 Category    : Hooman
 Description : Otaku dude
 ====================================
@@ -20,11 +10,9 @@ Description : Otaku dude
 ====================================
 Part Number : owfw
 Name        : a;faefr
-Quantity    : 16
-Price       : 17
+Quantity    : 17
+Price       : 16
 Category    : drgegeg
 Description : egegeg
 ====================================
 
-=======
->>>>>>> 3228d60a469da6e19029ed362e8320c29b8cabc3
