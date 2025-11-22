@@ -6,7 +6,7 @@ import java.util.*;
 public final class Inventory {
     //create a list to store parts
         private List<Part> partsList;
-        private final String FILE_NAME = "../src/inventory_data.txt";
+        private final String FILE_NAME = "C:\\Users\\CerealKiller\\Documents\\GitHub\\RoboticsParts_Inventory_System\\PartsInventorySystem\\src\\inventory_data.txt";
 
     //creating a constructor
     public Inventory(){
@@ -22,13 +22,14 @@ public final class Inventory {
 
     //View all parts
     public void viewAllParts(){
-        if (partsList.isEmpty()){
-            System.out.println("No parts in inventory.");
-        } else {
-            for (Part part : partsList){
-                System.out.println(part);
-                System.out.println("------------------------------------");
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
+            String line;
+
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);  // do whatever you want with each line
             }
+
+        } catch (IOException e) {
         }
     }
 
@@ -72,6 +73,18 @@ public final class Inventory {
         }
     }
 
+    //this allows previewing the list of things to be added to the main txt file
+    public void preview() {
+        if (partsList.isEmpty()){
+            System.out.println("No parts to be added.");
+        } else {
+            for (Part part : partsList){
+                System.out.println(part);
+                System.out.println("------------------------------------");
+            }
+        }
+    }
+
     //Saving to file
     public void saveToFile(){
         /*Prints formatted representations of objects to 
@@ -97,6 +110,7 @@ public final class Inventory {
         } catch (IOException e) {
             System.out.println("Error saving inventory: " + e.getMessage());
         }
+        partsList.clear();
     }
 
     //load inv from file
@@ -164,6 +178,7 @@ public final class Inventory {
             System.out.println("Error loading inventory: " + e.getMessage());
         }
     }
+        
 
 
 
