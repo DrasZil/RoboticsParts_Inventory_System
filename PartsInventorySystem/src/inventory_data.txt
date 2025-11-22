@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ====================================
 Part Number : 67
 Name        : chicken
@@ -25,3 +26,5 @@ Category    : drgegeg
 Description : egegeg
 ====================================
 
+=======
+>>>>>>> 3228d60a469da6e19029ed362e8320c29b8cabc3
