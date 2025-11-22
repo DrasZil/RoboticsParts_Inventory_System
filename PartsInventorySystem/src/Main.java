@@ -11,13 +11,14 @@ public class Main {
         while(true){
             System.out.print("""
                                
-                            Robotics Parts Inventory System
+                            Robotics Parts Inventory System 
                                 1. Add Part
-                               2. View All Parts
+                               2. View Inventory
                                3. Search Part
                                4. Update Quantity
                                5. Delete Part
-                               6. Save and Exit
+                               6  Preview
+                               7. Save and Exit
                             Choose an option: """);
 
             int choice = input.nextInt();
@@ -65,6 +66,12 @@ public class Main {
                     inventory.deletePart(deletePartNumber);
                 }
                 case 6 -> {
+                    System.out.println("This is a preview of the parts to be added to the Main Inventory");
+                    inventory.prev14iew();
+
+
+                }
+                case 7 -> {
                     inventory.saveToFile();
                     
                     System.out.print("Do you want to continue? (Y/N): ");
