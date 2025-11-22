@@ -17,7 +17,6 @@ public final class Inventory {
     //Adding a part
     public void addPart(Part part){
         partsList.add(part);
-        System.out.println("Part added: " + part.getName());
     }
 
     //View all parts
@@ -53,10 +52,14 @@ public final class Inventory {
 
     //updating the quantity of a part
     public void updateQuantity(String partNumber, int newQuantity){
+        Scanner sc = new Scanner(System.in);
         Part part = searchPart(partNumber);
         if (part != null){
             part.setQuantity(newQuantity);
             System.out.println("Quantity updated for " + part.getName());
+
+            
+
         }else{
             System.out.println("Part not found.");
         }
@@ -85,7 +88,25 @@ public final class Inventory {
         }
     }
 
-    //Saving to file
+    public void editPart(String name){
+    boolean found = false;
+    name = name.trim(); // remove accidental leading/trailing spaces
+
+    for (Part part : partsList) {
+        if (part != null && part.getName() != null && part.getName().equalsIgnoreCase(name)) {
+            System.out.println("part found");
+            found = true;
+            break;
+        }
+    }
+
+    if (!found) {
+        System.out.println("Part not found.");
+    }
+
+}
+
+    //Saving to file1
     public void saveToFile(){
         /*Prints formatted representations of objects to 
         a text-output stream. This class implements all of the print methods found in PrintStream. */

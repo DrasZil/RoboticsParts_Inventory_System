@@ -1,6 +1,7 @@
 //Main class will provide the console based menu for user interaction
 
 import java.util.Scanner;
+import javax.sound.midi.Soundbank;
 
 public class Main {
     public static void main(String[] args) {
@@ -53,8 +54,10 @@ public class Main {
                     Part newPart= new Part(name, partNumber, quantity, price, category, description);
                     inventory.addPart(newPart);
 
-                    System.out.println("Part added:");
+                    System.out.println("---- ---- ----");
+                    System.out.print("Part added! ---- ");
                     System.out.println(newPart); 
+                    System.out.println("---- ---- ----");
                 }
                 case 2 -> inventory.viewAllParts();
                 case 3 -> {
@@ -81,7 +84,35 @@ public class Main {
                 }
                 case 6 -> {
                     System.out.println("This is a preview of the parts to be added to the Main Inventory");
-                    inventory.preview();
+                    System.out.println("---------------------------------");
+                    System.out.println("Choose an Option to Proceed (1/2)");
+                    System.out.println("---------------------------------");
+                    System.out.println("Option 1: preview Parts  \nOption 2: Edit/Delete Part  \nOption 3: Exit");
+                    System.out.println("Enter Option: ");
+                    int res = input.nextInt();
+
+                    switch(res) {
+                    
+                        case 1 -> {
+                            System.out.println("===================================================");
+                            inventory.preview();
+                            System.out.println("===================================================");
+                        }
+                        case 2 -> {
+                            System.out.print("Enter the Name of the part: ");
+                            input.nextLine();           // consume leftover newline from previous nextInt() or nextDouble()
+                            String pname = input.nextLine(); // now actually reads the user input
+                            inventory.editPart(pname);
+                            
+
+                        }
+                        case 3 -> {
+                            System.out.println("insert exit");
+                        }
+                    }
+                     
+
+
 
                 }
                 case 7 -> {
