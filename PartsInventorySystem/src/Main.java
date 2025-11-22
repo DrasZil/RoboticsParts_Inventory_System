@@ -30,8 +30,18 @@ public class Main {
                     String name = input.nextLine();
                     System.out.print("Enter part Number:");
                     String partNumber = input.nextLine();
+                    int quantity;
+                    while (true) { // loop until valid input
                     System.out.print("Enter Quantity: ");
-                    int quantity = input.nextInt();
+                    if (input.hasNextInt()) {
+                    quantity = input.nextInt();
+                    input.nextLine();
+                    break;
+                    } else {
+                    System.out.println("Invalid input. Please enter a number.");
+                    input.nextLine();
+                    }
+                    }
                     System.out.print("Enter Price: ");
                     int price = input.nextInt();
                     input.nextLine();
@@ -40,7 +50,11 @@ public class Main {
                     System.out.print("Enter Description: ");
                     String description = input.nextLine();
 
-                    inventory.addPart(new Part(name, partNumber, quantity, price, category, description));
+                    Part newPart= new Part(name, partNumber, quantity, price, category, description);
+                    inventory.addPart(newPart);
+
+                    System.out.println("Part added:");
+                    System.out.println(newPart); 
                 }
                 case 2 -> inventory.viewAllParts();
                 case 3 -> {
