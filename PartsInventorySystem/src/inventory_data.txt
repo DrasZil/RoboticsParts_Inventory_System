@@ -1,9 +1,0 @@
-====================================
-Part Number : 67
-Name        : chicken
-Quantity    : 120
-Price       : 67
-Category    : food
-Description : delisyoso chicken
-====================================
-
