@@ -115,7 +115,7 @@ public class Main {
 
                 }
                 case 7 -> {
-                    inventory.saveToFile();
+                    inventory.saveToFile(true);
                     
                     System.out.print("Do you want to continue? (Y/N): ");
                     String continueChoice = input.nextLine().trim().toUpperCase();

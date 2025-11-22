@@ -6,7 +6,7 @@ import java.util.*;
 public final class Inventory {
     //create a list to store parts
         private List<Part> partsList;
-        private final String FILE_NAME = "E:\\College Prog\\Java_Final_Group_Project\\RoboticsParts_Inventory_System\\PartsInventorySystem\\src\\inventory_data.txt";
+        private final String FILE_NAME = "C:\\Users\\Admin\\Documents\\GitHub\\RoboticsParts_Inventory_System\\PartsInventorySystem\\src\\inventory_data.txt";
 
     //creating a constructor
     public Inventory(){
@@ -71,6 +71,7 @@ public final class Inventory {
         if (part != null){
             partsList.remove(part);
             System.out.println("Part deleted." + part.getName());
+            saveToFile(false);
         }else{
             System.out.println("Part not found.");
         }
@@ -107,11 +108,11 @@ public final class Inventory {
 }
 
     //Saving to file1
-    public void saveToFile(){
+    public void saveToFile(boolean appendMode){
         /*Prints formatted representations of objects to 
         a text-output stream. This class implements all of the print methods found in PrintStream. */
         //Constructs a FileWriter given a file name, using the default charset
-        try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_NAME, true))){
+        try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_NAME, appendMode))){
 
             if (partsList.isEmpty()){
                 System.out.println("No parts in Inventory.");

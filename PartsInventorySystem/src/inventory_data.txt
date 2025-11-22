@@ -1,31 +1,4 @@
 ====================================
-Part Number : 67
-Name        : Tom
-Quantity    : 1
-Price       : 670000000
-Category    : Hooman
-Description : Otaku dude
-====================================
-
-====================================
-Part Number : owfw
-Name        : a;faefr
-Quantity    : 17
-Price       : 16
-Category    : drgegeg
-Description : egegeg
-====================================
-
-====================================
-Part Number : 67
-Name : Tom
-Quantity    : 670000000
-Price       : 1
-Category    : Hooman
-Description : Otaku dude
-====================================
-
-====================================
 Part Number : owfw
 Name : a;faefr
 Quantity    : 16
@@ -35,11 +8,11 @@ Description : egegeg
 ====================================
 
 ====================================
-Part Number : bruh
-Name : jeje
-Quantity    : 76
-Price       : 67
-Category    : huh?
-Description : yes
+Part Number : 12
+Name : 12
+Quantity    : 12
+Price       : 12
+Category    : 12
+Description : 12
 ====================================
 
