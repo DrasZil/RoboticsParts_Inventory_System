@@ -119,7 +119,7 @@ public final class Inventory {
             for (Part part : partsList){
                 writer.println("====================================");
                 writer.println("Part Number : " + part.getPartNumber());
-                writer.println("Name        : " + part.getName());
+                writer.println("Name : " + part.getName());
                 writer.println("Quantity    : " + part.getQuantity());
                 writer.println("Price       : " + part.getPrice());
                 writer.println("Category    : " + part.getCategory());

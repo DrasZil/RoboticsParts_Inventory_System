@@ -1,7 +1,6 @@
 //Main class will provide the console based menu for user interaction
 
 import java.util.Scanner;
-import javax.sound.midi.Soundbank;
 
 public class Main {
     public static void main(String[] args) {
@@ -54,10 +53,10 @@ public class Main {
                     Part newPart= new Part(name, partNumber, quantity, price, category, description);
                     inventory.addPart(newPart);
 
-                    System.out.println("---- ---- ----");
+                    System.out.println("---- ---- ----O");
                     System.out.print("Part added! ---- ");
                     System.out.println(newPart); 
-                    System.out.println("---- ---- ----");
+                    System.out.println("---- ---- ----O");
                 }
                 case 2 -> inventory.viewAllParts();
                 case 3 -> {
