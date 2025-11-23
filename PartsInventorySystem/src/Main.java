@@ -1,24 +1,25 @@
 //Main class will provide the console based menu for user interaction
 
 import java.util.Scanner;
-import javax.sound.midi.Soundbank;
+
 
 public class Main {
     public static void main(String[] args) {
         //initialize the Inventory class to be called as inventory
         Inventory inventory = new Inventory();
         Scanner input = new Scanner(System.in);
+        inventory.clear();
 
         while(true){
             System.out.print("""
                                
-                            Robotics Parts Inventory System 
-                                1. Add Part
+                    === Welcome to the Robotic Parts Inventory System !! ===
+                               1. Add Part
                                2. View Inventory
                                3. Search Part
                                4. Update Quantity
                                5. Delete Part
-                               6  Preview
+                               6. Preview
                                7. Save and Exit
                             Choose an option: """);
 
@@ -53,7 +54,7 @@ public class Main {
 
                     Part newPart= new Part(name, partNumber, quantity, price, category, description);
                     inventory.addPart(newPart);
-
+                    
                     System.out.println("---- ---- ----");
                     System.out.print("Part added! ---- ");
                     System.out.println(newPart); 
@@ -85,9 +86,9 @@ public class Main {
                 case 6 -> {
                     System.out.println("This is a preview of the parts to be added to the Main Inventory");
                     System.out.println("---------------------------------");
-                    System.out.println("Choose an Option to Proceed (1/2)");
+                    System.out.println("Choose an Option to Proceed (1/3)");
                     System.out.println("---------------------------------");
-                    System.out.println("Option 1: preview Parts  \nOption 2: Edit/Delete Part  \nOption 3: Exit");
+                    System.out.println("Option 1: preview Parts  \nOption 2: Edit Part  \nOption 3: Delete Part");
                     System.out.println("Enter Option: ");
                     int res = input.nextInt();
 
@@ -99,19 +100,25 @@ public class Main {
                             System.out.println("===================================================");
                         }
                         case 2 -> {
-                            System.out.print("Enter the Name of the part: ");
-                            input.nextLine();           // consume leftover newline from previous nextInt() or nextDouble()
-                            String pname = input.nextLine(); // now actually reads the user input
-                            inventory.editPart(pname);
+                            inventory.preview();
+                            System.out.println("===================================================");
+                            System.out.print("Select number u want to edit: ");
+                            input.nextLine();
+                            int pnum = input.nextInt();
+                            inventory.editPart(pnum);
                             
 
                         }
                         case 3 -> {
-                            System.out.println("insert exit");
-                        }
-                    }
-                     
-
+                            inventory.preview();
+                            System.out.println("===================================================");
+                            System.out.print("Select number u want to remove: ");
+                            input.nextLine();
+                            int pnum = input.nextInt();
+                            inventory.deleteprev(pnum);
+                        }   
+                    }   
+                    
 
 
                 }
