@@ -5,36 +5,37 @@ import java.util.*;
 
 public final class Inventory {
     //create a list to store parts
-        private List<Part> partsList;
-        private final String FILE_NAME = "C:\\Users\\CerealKiller\\Documents\\GitHub\\RoboticsParts_Inventory_System\\PartsInventorySystem\\src\\inventory_data.txt";
+        private List<Part> loadedPartsList; //parts loaded from file
+        private List<Part> tempPartsList; //parts added during runtime/current session
+        private final String FILE_NAME = "E:\\College Prog\\Java_Final_Group_Project\\RoboticsParts_Inventory_System\\PartsInventorySystem\\src\\inventory_data.txt";
 
     //creating a constructor
     public Inventory(){
-        partsList = new ArrayList<>();
+        loadedPartsList = new ArrayList<>();
+        tempPartsList = new ArrayList<>();
         loadFromFile();
     }
 
-    //Adding a part
+    //Adding a new part to temp list
     public void addPart(Part part){
-        partsList.add(part);
+        tempPartsList.add(part);
     }
 
-    //View all parts
+    //View all parts in the file
     public void viewAllParts(){
-        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
-            String line;
-
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line); 
+        if (loadedPartsList.isEmpty()){
+            System.out.println("No parts in inventory.");
+        } else {
+            for (Part part : loadedPartsList){
+                System.out.println(part);
+                System.out.println("------------------------------------");
             }
-
-        } catch (IOException e) {
         }
     }
 
-    //Search parts by name or part number
+    //Search parts by name or part number in loadedPartsList
     public Part searchPart(String query){
-        for (Part part : partsList){
+        for (Part part : loadedPartsList){
             //equalsIgnoreCase()
             /*Compares this String to another String, 
             ignoring case considerations. 
@@ -50,9 +51,8 @@ public final class Inventory {
         return null;
     }
 
-    //updating the quantity of a part
+    //updating the quantity in loadedPartsList
     public void updateQuantity(String partNumber, int newQuantity){
-        Scanner sc = new Scanner(System.in);
         Part part = searchPart(partNumber);
         if (part != null){
             part.setQuantity(newQuantity);
@@ -65,26 +65,27 @@ public final class Inventory {
         }
     }
 
-    //deleting a part
+    //deleting from loadedPartsList
     public void deletePart(String partNumber){
         Part part = searchPart(partNumber);
         if (part != null){
-            partsList.remove(part);
+            loadedPartsList.remove(part);
             System.out.println("Part deleted." + part.getName());
-            saveToFile(false);
+            saveToFile();
         }else{
             System.out.println("Part not found.");
         }
     }
 
     //this allows previewing the list of things to be added to the main txt file
+    //preview from tempPartsList
     public void preview() {
-        if (partsList.isEmpty()){
+        if (tempPartsList.isEmpty()){
             System.out.println("No parts to be added.");
         } else {
             int id = 0;
-            for (Part part : partsList){
-                System.out.println("=" + id + "= " + part);
+            for (Part part : tempPartsList){
+                System.out.println(id + ". " + part);
                 System.out.println("------------------------------------");
                 id++;
             }
@@ -92,93 +93,90 @@ public final class Inventory {
     }
     // removing parts in the preview function
     public void deleteprev(int num){
-        partsList.remove(num);
-        System.out.println("Part: " + partsList.indexOf(num) + "\n has been deleted successfully!");
+        //fixed bug, indexOf(Num) to remoeve(num) num is not a part object
+        if(num >= 0 && num < tempPartsList.size()){
+            Part removed = tempPartsList.remove(num);
+            System.out.println("Part: " + removed.getName() + "\n has been deleted successfully!");
+    } else {
+        System.out.println("Invalid Index.");
     }
+}
     // editing parts in the preview function
+    //FIXED: used set function from Parts instead of creating "New"
     public void editPart(int num){
-        Scanner input = new Scanner(System.in);
-        
-            Part p = partsList.get(num);
+        if(num >= 0 && num <tempPartsList.size()){
+            Part p = tempPartsList.get(num);
+            Scanner input = new Scanner(System.in);
 
-        
-        System.out.print("Enter new Name: ");
-        String newName = input.nextLine();
+            System.out.print("Enter new Name (current: " + p.getName() + "): ");
+            p.setName(input.nextLine());
 
-        System.out.print("Enter new part Number: ");
-        String newPartNumber = input.nextLine();
+            System.out.print("Enter new Part Number (current: " + p.getPartNumber() + "): ");
+            p.setPartNumber(input.nextLine());
 
-        int newQuantity;
-        while (true) {
-            System.out.print("Enter new Quantity: ");
-            if (input.hasNextInt()) {
-                newQuantity = input.nextInt();
-                input.nextLine();
-                break;
-            } else {
-        System.out.println("Invalid input. Please enter a number.");
-        input.nextLine();
+            int newQuantity;
+            while (true) {
+                System.out.print("Enter new Quantity (current: " + p.getQuantity() + "): ");
+                if (input.hasNextInt()) {
+                    newQuantity = input.nextInt();
+                    input.nextLine(); // consume newline
+                    break;
+                } else {
+                    System.out.println("Invalid input. Please enter a valid integer for quantity.");
+                    input.next(); 
+                }
             }
+            p.setQuantity(newQuantity);
+
+            System.out.print("Enter new Price (current: " + p.getPrice() + "): ");
+            int newPrice = input.nextInt();
+            input.nextLine();
+            p.setPrice(newPrice);
+
+            System.out.print("Enter new Category (current: " + p.getCategory() + "): ");
+            p.setCategory(input.nextLine());
+
+            System.out.print("Enter new Description (current: " + p.getDescription() + "): ");
+            p.setDescription(input.nextLine());
+
+            System.out.println("Part updated successfully: " + p);
+        } else {
+            System.out.println("Invalid Index.");
         }
+        
+}
 
-        System.out.print("Enter new Price: ");
-        int newPrice = input.nextInt();
-        input.nextLine();
-
-        System.out.print("Enter new Category: ");
-        String newCategory = input.nextLine();
-
-        System.out.print("Enter new Description: ");
-        String newDescription = input.nextLine();
-
-        p.setName(newName);
-        p.setPartNumber(newPartNumber);
-        p.setQuantity(newQuantity);
-        p.setPrice(newPrice);
-        p.setCategory(newCategory);
-        p.setDescription(newDescription);
-
-        System.out.println("Part updated successfully!");
-    
-    }
-
-    //Saving to file1
-    public void saveToFile(boolean appendMode){
+    //Saving inventory: merge loadedPartsList + tempPArtsList
+    public void saveToFile(){
         /*Prints formatted representations of objects to 
         a text-output stream. This class implements all of the print methods found in PrintStream. */
         //Constructs a FileWriter given a file name, using the default charset
-        try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_NAME, appendMode))){
+        try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_NAME, false))){
+            //merge both lists
+            List<Part> mergedList = new ArrayList<>();
+            mergedList.addAll(loadedPartsList);
+            mergedList.addAll(tempPartsList);
 
-            if (partsList.isEmpty()){
-                System.out.println(" Evrything Has Been Saved! ");
-            } else {
-            for (Part part : partsList){
+            for (Part part : mergedList){
                 writer.println("====================================");
                 writer.println("Part Number : " + part.getPartNumber());
-                writer.println("Name : " + part.getName());
+                writer.println("Name        : " + part.getName());
                 writer.println("Quantity    : " + part.getQuantity());
                 writer.println("Price       : " + part.getPrice());
                 writer.println("Category    : " + part.getCategory());
-                writer.println("Description : " + part.getDescription());
-                writer.println("====================================\n");
+                writer.println("Description : " + part.getDescription());  writer.println("====================================\n");
             }
-                System.out.println("Inventory saved Successfully!.");
+              System.out.println("Inventory saved Successfully!");
+              //moving tempPartsList to loadedPartsList
+              loadedPartsList.addAll(tempPartsList);
+              tempPartsList.clear();  System.out.println("Inventory saved Successfully!.");
             }
-        } catch (IOException e) {
+         catch (IOException e) {
             System.out.println("Error saving inventory: " + e.getMessage());
-        }
-        clear();
     }
-
-    //clearing out the memory list (bug fix)
-    public void clear() {
-        partsList.clear();
     }
-
     //load inv from file
     public void loadFromFile(){
-        partsList = new ArrayList<>();
-
         File file = new File(FILE_NAME);
         if (!file.exists()){
             System.out.println("No existing inventory file found. Creating a new inventory file...");
@@ -228,7 +226,8 @@ public final class Inventory {
                 } else if (line.startsWith("=====")) {
                     //end part of block, add to list if all fields exist
                     if (partNumber != null && name != null && category != null && description != null){
-                            partsList.add(new Part(name, partNumber, quantity, price, category, description));
+                            //fixed bug, fixed proper constructor order
+                            loadedPartsList.add(new Part(name, partNumber, quantity, price, category, description));
                             partNumber = name = category = description = null;
                             quantity = 0;
                             price = 0;
