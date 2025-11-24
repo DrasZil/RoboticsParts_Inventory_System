@@ -6,7 +6,7 @@ import java.util.*;
 public final class Inventory {
     //create a list to store parts
         private List<Part> partsList;
-        private final String FILE_NAME = "C:\\Users\\Admin\\Documents\\GitHub\\RoboticsParts_Inventory_System\\PartsInventorySystem\\src\\inventory_data.txt";
+        private final String FILE_NAME = "C:\\Users\\CerealKiller\\Documents\\GitHub\\RoboticsParts_Inventory_System\\PartsInventorySystem\\src\\inventory_data.txt";
 
     //creating a constructor
     public Inventory(){
@@ -25,7 +25,7 @@ public final class Inventory {
             String line;
 
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);  // do whatever you want with each line
+                System.out.println(line); 
             }
 
         } catch (IOException e) {
@@ -82,30 +82,65 @@ public final class Inventory {
         if (partsList.isEmpty()){
             System.out.println("No parts to be added.");
         } else {
+            int id = 0;
             for (Part part : partsList){
-                System.out.println(part);
+                System.out.println("=" + id + "= " + part);
                 System.out.println("------------------------------------");
+                id++;
             }
         }
     }
+    // removing parts in the preview function
+    public void deleteprev(int num){
+        partsList.remove(num);
+        System.out.println("Part: " + partsList.indexOf(num) + "\n has been deleted successfully!");
+    }
+    // editing parts in the preview function
+    public void editPart(int num){
+        Scanner input = new Scanner(System.in);
+        
+            Part p = partsList.get(num);
 
-    public void editPart(String name){
-    boolean found = false;
-    name = name.trim(); // remove accidental leading/trailing spaces
+        
+        System.out.print("Enter new Name: ");
+        String newName = input.nextLine();
 
-    for (Part part : partsList) {
-        if (part != null && part.getName() != null && part.getName().equalsIgnoreCase(name)) {
-            System.out.println("part found");
-            found = true;
-            break;
+        System.out.print("Enter new part Number: ");
+        String newPartNumber = input.nextLine();
+
+        int newQuantity;
+        while (true) {
+            System.out.print("Enter new Quantity: ");
+            if (input.hasNextInt()) {
+                newQuantity = input.nextInt();
+                input.nextLine();
+                break;
+            } else {
+        System.out.println("Invalid input. Please enter a number.");
+        input.nextLine();
+            }
         }
-    }
 
-    if (!found) {
-        System.out.println("Part not found.");
-    }
+        System.out.print("Enter new Price: ");
+        int newPrice = input.nextInt();
+        input.nextLine();
 
-}
+        System.out.print("Enter new Category: ");
+        String newCategory = input.nextLine();
+
+        System.out.print("Enter new Description: ");
+        String newDescription = input.nextLine();
+
+        p.setName(newName);
+        p.setPartNumber(newPartNumber);
+        p.setQuantity(newQuantity);
+        p.setPrice(newPrice);
+        p.setCategory(newCategory);
+        p.setDescription(newDescription);
+
+        System.out.println("Part updated successfully!");
+    
+    }
 
     //Saving to file1
     public void saveToFile(boolean appendMode){
@@ -115,7 +150,7 @@ public final class Inventory {
         try (PrintWriter writer = new PrintWriter(new FileWriter(FILE_NAME, appendMode))){
 
             if (partsList.isEmpty()){
-                System.out.println("No parts in Inventory.");
+                System.out.println(" Evrything Has Been Saved! ");
             } else {
             for (Part part : partsList){
                 writer.println("====================================");
@@ -132,6 +167,11 @@ public final class Inventory {
         } catch (IOException e) {
             System.out.println("Error saving inventory: " + e.getMessage());
         }
+        clear();
+    }
+
+    //clearing out the memory list (bug fix)
+    public void clear() {
         partsList.clear();
     }
 

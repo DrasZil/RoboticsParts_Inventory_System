@@ -6,13 +6,3 @@ Price       : 17
 Category    : drgegeg
 Description : egegeg
 ====================================
-
-====================================
-Part Number : 12
-Name : 12
-Quantity    : 12
-Price       : 12
-Category    : 12
-Description : 12
-====================================
-

@@ -3,12 +3,12 @@
 import java.io.Serializable; //allows saving/loading objects to/from files
 
 public class Part implements Serializable {
-    private final String name;
-    private final String partNumber;
+    private String name;
+    private String partNumber;
     private int quantity;
     private int price;
-    private final String category;
-    private final String description;
+    private String category;
+    private String description;
 
     //creating a constrctor
     //local parameters inside Part()
@@ -27,12 +27,17 @@ public class Part implements Serializable {
     //Get will get the instance variable value from the user
     //Set will set the value of the instance variable from the user
     public String getName(){
-        return name; }
-    
+        return name; 
+    }
+    public void setName(String Name){
+        this.name = Name; 
+    }
     public String getPartNumber(){
         return partNumber;
     }
-
+    public String setPartNumber(String Partnumber){
+        return this.partNumber = Partnumber;
+    }
     public int getQuantity(){
         return quantity;
     }
@@ -52,9 +57,14 @@ public class Part implements Serializable {
     public String getCategory(){
         return category;
     }
-
+    public String setCategory(String Category){
+        return this.category = Category;
+    }
     public String getDescription(){
         return description;
+    }
+    public String setDescription(String Description){
+        return this.description = Description;
     }
 
     //override toString method
@@ -65,4 +75,5 @@ public class Part implements Serializable {
                             name, partNumber, quantity, price, category, description);
     }
 
+    
 }
