@@ -13,8 +13,9 @@ public class Part implements Serializable {
     //creating a constrctor
     //local parameters inside Part()
     //"this." Assigns parameter to the instance variables
-    public Part(String name, String partNumber, int price, int quantity, 
+    public Part(String name, String partNumber, int quantity, int price,
                 String category, String description){
+                    //bg fixed, fixed proper order
                     this.name = name;
                     this.partNumber = partNumber;
                     this.quantity = quantity;
