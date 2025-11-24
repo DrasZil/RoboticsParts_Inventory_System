@@ -13,7 +13,7 @@ public class Main {
                                
                     === Welcome to the Robotic Parts Inventory System !! ===
                     1. Add Part
-                    2. View Inventory16
+                    2. View Inventory
                     3. Search Part
                     4. Update Quantity
                     5. Delete Part
@@ -26,10 +26,27 @@ public class Main {
 
             switch(choice){
                 case 1 -> {
-                    System.out.print("Enter Name: ");
-                    String name = input.nextLine();
-                    System.out.print("Enter part Number: ");
-                    String partNumber = input.nextLine();
+                    String name;
+                    while (true) { 
+                        System.out.print("Enter Part Name: ");
+                        name = input.nextLine();
+                        if (!inventory.nameExists(name)) {
+                     break;
+                        } else {
+                            System.out.println("Name Already Exists. Please enter a different name.");
+                        }
+                    }
+
+                    String partNumber;
+                    while (true) { 
+                        System.out.print("Enter Part Number: ");
+                        partNumber = input.nextLine();
+                        if (!inventory.partNumberExists(partNumber)) {
+                     break;
+                        } else {
+                            System.out.println("Part Number Already Exists. Please enter a Part Number.");
+                        }
+                    }
 
                     int quantity;
                     while (true) { // loop until valid input

@@ -7,7 +7,7 @@ public final class Inventory {
     //create a list to store parts
         private List<Part> loadedPartsList; //parts loaded from file
         private List<Part> tempPartsList; //parts added during runtime/current session
-        private final String FILE_NAME = "E:\\College Prog\\Java_Final_Group_Project\\RoboticsParts_Inventory_System\\PartsInventorySystem\\src\\inventory_data.txt";
+        private final String FILE_NAME = "C:\\Users\\Admin\\Documents\\GitHub\\RoboticsParts_Inventory_System\\PartsInventorySystem\\src\\inventory_data.txt";
 
     //creating a constructor
     public Inventory(){
@@ -32,6 +32,38 @@ public final class Inventory {
             }
         }
     }
+
+
+    // Check for Duplicates in Name 
+    public boolean nameExists(String name){
+        for (Part part : loadedPartsList){
+            if(part.getName().equalsIgnoreCase(name)){
+                return true;
+            }
+        }
+        for (Part part : loadedPartsList){
+            if(part.getName().equalsIgnoreCase(name)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Check for Duplicates in Part Number
+    public boolean partNumberExists(String partNumber){
+        for (Part part : loadedPartsList){
+            if(part.getPartNumber().equalsIgnoreCase(partNumber)){
+                return true;
+            }
+        }
+        for (Part part : loadedPartsList){
+            if(part.getPartNumber().equalsIgnoreCase(partNumber)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     //Search parts by name or part number in loadedPartsList
     public Part searchPart(String query){
