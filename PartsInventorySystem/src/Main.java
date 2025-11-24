@@ -33,7 +33,7 @@ public class Main {
                         if (!inventory.nameExists(name)) {
                      break;
                         } else {
-                            System.out.println("Name Already Exists. Please enter a different name.");
+                            System.out.println("Name already exists. Please enter a different name.");
                         }
                     }
 
@@ -44,7 +44,7 @@ public class Main {
                         if (!inventory.partNumberExists(partNumber)) {
                      break;
                         } else {
-                            System.out.println("Part Number Already Exists. Please enter a Part Number.");
+                            System.out.println("Part Number already exists. Please enter a part number.");
                         }
                     }
 
@@ -61,9 +61,35 @@ public class Main {
                         }
                     }
 
-                    System.out.print("Enter Price: ");
-                    int price = input.nextInt();
-                    input.nextLine();
+                    System.out.print("Enter Currency (PHP/USD): ");
+                    String currency = input.nextLine().trim().toUpperCase();
+
+                    while (true) {
+                        System.out.print("Enter Currency (PHP/USD): ");
+                        currency = input.nextLine().trim().toUpperCase();
+                        if (currency.equals("PHP") || currency.equals("USD")) {
+                            break;
+                        } else {
+                            System.out.println("Invalid currency. Please enter either 'PHP' or 'USD'.");
+                        }
+                    }
+
+                    double priceInput;
+                    while (true) { 
+                        System.out.print("Enter Price: ");
+                        if (input.hasNextDouble()) {
+                            priceInput = input.nextDouble();
+                            input.nextLine();
+                            break;
+                        } else {
+                            System.out.println("Invalid input. Please enter a number.");
+                            input.nextLine();
+                        }  
+                    }
+
+                    double exchangeRate = 56.67; 
+                    int price = (int) Math.round(currency.equals("USD") ? priceInput * exchangeRate : priceInput);
+
                     System.out.print("Enter Category: ");
                     String category = input.nextLine();
                     System.out.print("Enter Description: ");

@@ -8,15 +8,6 @@ Description : f wfwofw
 ====================================
 
 ====================================
-Part Number : 199bg
-Name        : efwwfwfwf
-Quantity    : 1720
-Price       : 8000
-Category    : 19000
-Description : egewgwgwr
-====================================
-
-====================================
 Part Number : 18
 Name        : Oliver
 Quantity    : 1
@@ -35,11 +26,29 @@ Description : Human
 ====================================
 
 ====================================
-Part Number : 12
-Name        : John
-Quantity    : 67
-Price       : 100
+Part Number : 67
+Name        : Tomas
+Quantity    : 1
+Price       : 680
+Category    : 11
+Description : 1
+====================================
+
+====================================
+Part Number : 2
+Name        : 6
+Quantity    : 4
+Price       : 900
 Category    : 1
-Description : John
+Description : 1
+====================================
+
+====================================
+Part Number : 12
+Name        : 09
+Quantity    : 1
+Price       : 3797
+Category    : q
+Description : 12
 ====================================
 
