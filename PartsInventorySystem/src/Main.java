@@ -7,20 +7,19 @@ public class Main {
         //initialize the Inventory class to be called as inventory
         Inventory inventory = new Inventory();
         Scanner input = new Scanner(System.in);
-        inventory.clear();
 
         while(true){
             System.out.print("""
                                
                     === Welcome to the Robotic Parts Inventory System !! ===
-                               1. Add Part
-                               2. View Inventory
-                               3. Search Part
-                               4. Update Quantity
-                               5. Delete Part
-                               6. Preview
-                               7. Save and Exit
-                            Choose an option: """);
+                    1. Add Part
+                    2. View Inventory16
+                    3. Search Part
+                    4. Update Quantity
+                    5. Delete Part
+                    6. Preview
+                    7. Save and Exit
+                        Choose an option: """ + " ");
 
             int choice = input.nextInt();
             input.nextLine();
@@ -29,8 +28,9 @@ public class Main {
                 case 1 -> {
                     System.out.print("Enter Name: ");
                     String name = input.nextLine();
-                    System.out.print("Enter part Number:");
+                    System.out.print("Enter part Number: ");
                     String partNumber = input.nextLine();
+
                     int quantity;
                     while (true) { // loop until valid input
                     System.out.print("Enter Quantity: ");
@@ -41,8 +41,9 @@ public class Main {
                     } else {
                     System.out.println("Invalid input. Please enter a number.");
                     input.nextLine();
+                        }
                     }
-                    }
+
                     System.out.print("Enter Price: ");
                     int price = input.nextInt();
                     input.nextLine();
@@ -54,10 +55,10 @@ public class Main {
                     Part newPart= new Part(name, partNumber, quantity, price, category, description);
                     inventory.addPart(newPart);
                     
-                    System.out.println("---- ---- ----");
+                    System.out.println("=== === === ");
                     System.out.print("Part added! ---- ");
                     System.out.println(newPart); 
-                    System.out.println("---- ---- ----O");
+                    System.out.println("=== === === ");
                 }
                 case 2 -> inventory.viewAllParts();
                 case 3 -> {
@@ -71,24 +72,24 @@ public class Main {
                     }
                 }
                 case 4 -> {
-                    System.out.print("Enter Part Number to update quantity:");
+                    System.out.print("Enter Part Number to update quantity: ");
                     String updatePartNumber = input.nextLine();
-                    System.out.print("Enter new Quantity:");
+                    System.out.print("Enter new Quantity: ");
                     int newQuantity = input.nextInt();
                     inventory.updateQuantity(updatePartNumber, newQuantity);
                 }
                 case 5 -> {
-                    System.out.print("Enter Part Number to delete:");
+                    System.out.print("Enter Part Number to delete: ");
                     String deletePartNumber = input.nextLine();
                     inventory.deletePart(deletePartNumber);
                 }
                 case 6 -> {
                     System.out.println("This is a preview of the parts to be added to the Main Inventory");
                     System.out.println("---------------------------------");
-                    System.out.println("Choose an Option to Proceed (1/3)");
+                    System.out.println("Choose an Option to Proceed (1-3)");
                     System.out.println("---------------------------------");
                     System.out.println("Option 1: preview Parts  \nOption 2: Edit Part  \nOption 3: Delete Part");
-                    System.out.println("Enter Option: ");
+                    System.out.print("Enter Option: ");
                     int res = input.nextInt();
 
                     switch(res) {
@@ -104,6 +105,7 @@ public class Main {
                             System.out.print("Select number u want to edit: ");
                             input.nextLine();
                             int pnum = input.nextInt();
+                     
                             inventory.editPart(pnum);
                             
 
@@ -122,7 +124,7 @@ public class Main {
 
                 }
                 case 7 -> {
-                    inventory.saveToFile(true);
+                    inventory.saveToFile();
                     
                     System.out.print("Do you want to continue? (Y/N): ");
                     String continueChoice = input.nextLine().trim().toUpperCase();
