@@ -7,7 +7,7 @@ public final class Inventory {
     //create a list to store parts
         private List<Part> loadedPartsList; //parts loaded from file
         private List<Part> tempPartsList; //parts added during runtime/current session
-        private final String FILE_NAME = "C:\\Users\\Admin\\Documents\\GitHub\\RoboticsParts_Inventory_System\\PartsInventorySystem\\src\\inventory_data.txt";
+        private final String FILE_NAME = "E:\\College Prog\\Java_Final_Group_Project\\RoboticsParts_Inventory_System\\PartsInventorySystem\\src\\inventory_data.txt";
 
     //creating a constructor
     public Inventory(){
@@ -33,14 +33,8 @@ public final class Inventory {
         }
     }
 
-
     // Check for Duplicates in Name 
     public boolean nameExists(String name){
-        for (Part part : loadedPartsList){
-            if(part.getName().equalsIgnoreCase(name)){
-                return true;
-            }
-        }
         for (Part part : loadedPartsList){
             if(part.getName().equalsIgnoreCase(name)){
                 return true;
@@ -56,14 +50,8 @@ public final class Inventory {
                 return true;
             }
         }
-        for (Part part : loadedPartsList){
-            if(part.getPartNumber().equalsIgnoreCase(partNumber)){
-                return true;
-            }
-        }
         return false;
     }
-
 
     //Search parts by name or part number in loadedPartsList
     public Part searchPart(String query){
@@ -194,7 +182,16 @@ public final class Inventory {
                 writer.println("Part Number : " + part.getPartNumber());
                 writer.println("Name        : " + part.getName());
                 writer.println("Quantity    : " + part.getQuantity());
-                writer.println("Price       : " + part.getPrice());
+                //added currency display
+                //Ex. Price : PHP 500
+                writer.println("Price       : " + part.getCurrency() + " " + part.getPrice()); 
+                //only print Original Currency and Price if the part was originally in USD
+                //Ex. Price : PHP 500
+                    //Original : USD 10
+                if (part.getOriginalCurrency().equals("USD")){
+                    writer.println("(Original   : " + part.getOriginalCurrency() + " " + part.getOriginalPrice() + ")");
+                }
+
                 writer.println("Category    : " + part.getCategory());
                 writer.println("Description : " + part.getDescription());  writer.println("====================================\n");
             }
@@ -207,6 +204,7 @@ public final class Inventory {
             System.out.println("Error saving inventory: " + e.getMessage());
     }
     }
+
     //load inv from file
     public void loadFromFile(){
         File file = new File(FILE_NAME);
@@ -224,6 +222,9 @@ public final class Inventory {
            //collect data line by line
             String line;
             String partNumber = null, name = null, category = null, description = null;
+            //new variable
+            String currency = null, originalCurrency = null;
+            double originalPrice = 0;
             int price = 0;
             int quantity = 0;
 
@@ -245,24 +246,42 @@ public final class Inventory {
                  for the next part. */
                 if(line.startsWith("Part Number : ")){
                     partNumber = line.substring("Part Number : ".length());
+
                 } else if (line.startsWith("Name        : ")){
                     name = line.substring("Name        : ".length());
+
                 } else if (line.startsWith("Quantity    : ")){
                     quantity = Integer.parseInt(line.substring("Quantity    : ".length()));
+
                 } else if (line.startsWith("Price       : ")){
-                    price = Integer.parseInt(line.substring("Price       : ".length()));
+                    //this now reads currency when file is loaded
+                    //converted price:
+                    String[] parts = line.substring("Price       : ".length()).split(" ");
+                    currency = parts[0];
+                    price = Integer.parseInt(parts[1]);
+
+                } else if (line.startsWith("(Original   : ")) {
+                    //this now reads original currency and price when file is loaded
+                    String[] parts = line.substring("(Original   : ".length()).split(" ");
+                    originalCurrency = parts[0];
+                    originalPrice = Double.parseDouble(parts[1].replace(")", ""));
+                    
                 } else if (line.startsWith("Category    : ")) {
                     category = line.substring("Category    : ".length());
+
                 } else if (line.startsWith("Description : ")) {
                     description = line.substring("Description : ".length());
+
                 } else if (line.startsWith("=====")) {
                     //end part of block, add to list if all fields exist
                     if (partNumber != null && name != null && category != null && description != null){
                             //fixed bug, fixed proper constructor order
-                            loadedPartsList.add(new Part(name, partNumber, quantity, price, category, description));
+                            loadedPartsList.add(new Part(name, partNumber, quantity, price, currency, originalPrice, originalCurrency, category, description));
                             partNumber = name = category = description = null;
+                            originalCurrency = null;
                             quantity = 0;
                             price = 0;
+                            originalPrice = 0;
                         }
                 }
             }
