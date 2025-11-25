@@ -7,13 +7,3 @@ Price       : PHP 5667000
 Category    : Human
 Description : Human
 ====================================
-
-====================================
-Part Number : 69
-Name        : Johnny
-Quantity    : 67
-Price       : PHP 10
-Category    : Human
-Description : Bald guy, jack of all trades
-====================================
-
