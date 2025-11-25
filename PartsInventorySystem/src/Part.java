@@ -98,23 +98,19 @@ public class Part implements Serializable {
     @Override
     //toString for easy product display
     public String toString(){
-        StringBuilder sb = new StringBuilder();
-
-            sb.append("\n ---------------- PART DETAILS ---------------- \n");
-            sb.append(String.format("Name        : %s\n", name));
-            sb.append(String.format("Part Number : %s\n", partNumber));
-            sb.append(String.format("Quantity    : %d\n", quantity));
-            sb.append(String.format("Price       : %s %d\n", currency, price));
-            sb.append(String.format("Category    : %s\n", category));
-            sb.append(String.format("Description : %s\n", description));
-
-            //show origial USD price only if it exists AND is USD
-            if (originalCurrency != null && originalCurrency.equals("USD")){
-                sb.append(String.format("Original    : %s %.2f\n", originalCurrency, originalPrice));
-            }
-            sb.append("------------------------------------------------\n");
-            
-        return sb.toString();
+       return style.MAGENTA +
+            "\n================== PART DETAILS ==================\n" +
+            String.format("Name        : %s\n", name) +
+            String.format("Part Number : %s\n", partNumber) +
+            String.format("Quantity    : %d\n", quantity) +
+            String.format("Price       : %s %d\n", currency, price) +
+            (originalCurrency != null && originalCurrency.equals("USD")
+                    ? String.format("Original    : %s %.2f\n", originalCurrency, originalPrice)
+                    : "") +
+            String.format("Category    : %s\n", category) +
+            String.format("Description : %s\n", description) +
+            "===================================================\n" +
+            style.RESET;
     }
 
     

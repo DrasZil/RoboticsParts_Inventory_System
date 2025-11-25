@@ -24,11 +24,11 @@ public final class Inventory {
     //View all parts in the file
     public void viewAllParts(){
         if (loadedPartsList.isEmpty()){
-            System.out.println("No parts in inventory.");
+            style.empty("No parts in inventory.");
         } else {
             for (Part part : loadedPartsList){
                 System.out.println(part);
-                System.out.println("------------------------------------");
+                style.line();
             }
         }
     }
@@ -76,12 +76,12 @@ public final class Inventory {
         Part part = searchPart(partNumber);
         if (part != null){
             part.setQuantity(newQuantity);
-            System.out.println("Quantity updated for " + part.getName());
+            style.success("Quantity updated for " + part.getName());
 
             
 
         }else{
-            System.out.println("Part not found.");
+            style.error("Part not found.");
         }
     }
 
@@ -90,10 +90,10 @@ public final class Inventory {
         Part part = searchPart(partNumber);
         if (part != null){
             loadedPartsList.remove(part);
-            System.out.println("Part deleted." + part.getName());
+            style.success("Part deleted." + part.getName());
             saveToFile();
         }else{
-            System.out.println("Part not found.");
+            style.error("Part not found.");
         }
     }
 
@@ -101,12 +101,12 @@ public final class Inventory {
     //preview from tempPartsList
     public void preview() {
         if (tempPartsList.isEmpty()){
-            System.out.println("No parts to be added.");
+            style.error("No parts to be added.");
         } else {
             int id = 0;
             for (Part part : tempPartsList){
                 System.out.println(id + ". " + part);
-                System.out.println("------------------------------------");
+                style.line();
                 id++;
             }
         }
@@ -116,11 +116,12 @@ public final class Inventory {
         //fixed bug, indexOf(Num) to remoeve(num) num is not a part object
         if(num >= 0 && num < tempPartsList.size()){
             Part removed = tempPartsList.remove(num);
-            System.out.println("Part: " + removed.getName() + "\n has been deleted successfully!");
+            style.success("Part: " + removed.getName() + "\n has been deleted successfully!");
     } else {
-        System.out.println("Invalid Index.");
+        style.error("Invalid Index.");
     }
 }
+    
     // editing parts in the preview function
     //FIXED: used set function from Parts instead of creating "New"
     public void editPart(int num){
@@ -161,7 +162,7 @@ public final class Inventory {
 
             System.out.println("Part updated successfully: " + p);
         } else {
-            System.out.println("Invalid Index.");
+            style.error("Invalid Index.");
         }
         
 }
@@ -195,13 +196,13 @@ public final class Inventory {
                 writer.println("Category    : " + part.getCategory());
                 writer.println("Description : " + part.getDescription());  writer.println("====================================\n");
             }
-              System.out.println("Inventory saved Successfully!");
+              style.success("Inventory saved Successfully!");
               //moving tempPartsList to loadedPartsList
               loadedPartsList.addAll(tempPartsList);
-              tempPartsList.clear();  System.out.println("Inventory saved Successfully!.");
+              tempPartsList.clear(); 
             }
          catch (IOException e) {
-            System.out.println("Error saving inventory: " + e.getMessage());
+            style.error("Error saving inventory: " + e.getMessage());
     }
     }
 
@@ -209,7 +210,7 @@ public final class Inventory {
     public void loadFromFile(){
         File file = new File(FILE_NAME);
         if (!file.exists()){
-            System.out.println("No existing inventory file found. Creating a new inventory file...");
+            style.title("No existing inventory file found. Creating a new inventory file...");
             return;
         }
 
@@ -285,9 +286,9 @@ public final class Inventory {
                         }
                 }
             }
-            System.out.println("Inventory loaded from file.");
+            style.success("Inventory loaded from file.");
         } catch (IOException e){
-            System.out.println("Error loading inventory: " + e.getMessage());
+            style.error("Error loading inventory: " + e.getMessage());
         }
     }
         
