@@ -61,8 +61,7 @@ public class Main {
                         }
                     }
 
-                    System.out.print("Enter Currency (PHP/USD): ");
-                    String currency = input.nextLine().trim().toUpperCase();
+                    String currency;
 
                     while (true) {
                         System.out.print("Enter Currency (PHP/USD): ");
@@ -87,15 +86,38 @@ public class Main {
                         }  
                     }
 
-                    double exchangeRate = 56.67; 
-                    int price = (int) Math.round(currency.equals("USD") ? priceInput * exchangeRate : priceInput);
+                    double exchangeRate = 58.67; 
+                    //UPDATE:
+                    //this will store original Currency and original Price
+                    //when I click USD, it will convert to PHP using exchange rate
+                    //then It will show the converted price in the inventory and also its original USD price
+
+                    //store original
+                    String originalCurrency = currency;
+                    double originalPrice = priceInput;
+                    
+                    //convert if USD
+                    int price = (int) Math.round(
+                        currency.equals("USD") ? priceInput * exchangeRate : priceInput
+                    );
 
                     System.out.print("Enter Category: ");
                     String category = input.nextLine();
                     System.out.print("Enter Description: ");
                     String description = input.nextLine();
+                    
+                    //always save price in PHP
+                    String finalCurrency = "PHP";
 
-                    Part newPart= new Part(name, partNumber, quantity, price, category, description);
+                    //added currency parameter
+                    //added orginal Price and original Currency
+                    Part newPart = new Part(name, partNumber, quantity, 
+                    price, //already converted to PHP
+                    finalCurrency, 
+                    originalPrice, //USD value if USD was selected
+                    originalCurrency, //USD or PHP
+                    category, description);
+                  
                     inventory.addPart(newPart);
                     
                     System.out.println("=== === === ");
