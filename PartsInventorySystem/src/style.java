@@ -1,0 +1,46 @@
+public class style {
+    //ANSI Colors
+    public static final String RESET = "\u001B[0m";
+    public static final String BOLD = "\u001B[1m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String RED = "\u001B[31m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String MAGENTA = "\u001B[35m";
+    // Bright colors for visibility
+    public static final String BRIGHT_WHITE = "\u001B[97m"; // very visible for prompts
+
+
+
+    //Decorations
+    public static void line() {
+         System.out.println(CYAN + "------------------------------------------------------------" + RESET);
+    }
+
+    public static void title(String text) {
+        line();
+        System.out.println(BOLD + BLUE + "   " + text + RESET);
+        line();
+    }
+
+    public static void success(String text){
+        System.out.println(BOLD + GREEN + text + RESET);
+    }
+
+    public static void error(String text){
+        System.out.println(BOLD + RED + text + RESET);
+    }
+
+    public  static void warning(String text){
+        System.out.println(BOLD + YELLOW + text + RESET);
+    }
+
+    public static void empty(String text){
+        System.out.println(BOLD + CYAN + text + RESET);
+    }
+
+    public  static void enter(String text){
+        System.out.print(BOLD + BRIGHT_WHITE + text + RESET);
+    }
+}
