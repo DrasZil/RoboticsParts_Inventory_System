@@ -1,54 +1,19 @@
 ====================================
-Part Number : 199
-Name        : Tester
-Quantity    : 1000
-Price       : 18
-Category    : fg;es gwe
-Description : f wfwofw
-====================================
-
-====================================
 Part Number : 18
 Name        : Oliver
 Quantity    : 1
-Price       : 0
+Price       : PHP 5667000
+(Original   : USD 100000.0)
 Category    : Human
 Description : Human
 ====================================
 
 ====================================
-Part Number : 19
-Name        : Renz
-Quantity    : 1
-Price       : 0
+Part Number : 69
+Name        : Johnny
+Quantity    : 67
+Price       : PHP 10
 Category    : Human
-Description : Human
-====================================
-
-====================================
-Part Number : 67
-Name        : Tomas
-Quantity    : 1
-Price       : 680
-Category    : 11
-Description : 1
-====================================
-
-====================================
-Part Number : 2
-Name        : 6
-Quantity    : 4
-Price       : 900
-Category    : 1
-Description : 1
-====================================
-
-====================================
-Part Number : 12
-Name        : 09
-Quantity    : 1
-Price       : 3797
-Category    : q
-Description : 12
+Description : Bald guy, jack of all trades
 ====================================
 
