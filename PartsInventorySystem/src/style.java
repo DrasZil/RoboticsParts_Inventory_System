@@ -15,7 +15,13 @@ public class style {
 
     //Decorations
     public static void line() {
-         System.out.println(CYAN + "------------------------------------------------------------" + RESET);
+         System.out.println(
+            CYAN + 
+                          "  ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ ______ \r\n" + //
+                          " |______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|______|\r\n" + //
+                          "                                                                                                                                \r\n" + //
+             RESET
+             );
     }
 
     public static void title(String text) {
@@ -40,7 +46,127 @@ public class style {
         System.out.println(BOLD + CYAN + text + RESET);
     }
 
-    public  static void enter(String text){
+    public static void enter(String text){
         System.out.print(BOLD + BRIGHT_WHITE + text + RESET);
+    }
+
+
+    public static void mainTitle(){
+        System.out.println( BOLD + BLUE +
+        """    
+
+            ░█▀▄░█▀█░█▀▄░█▀█░▀█▀░▀█▀░█▀▀░█▀▀░░░█▀█░█▀█░█▀▄░▀█▀░█▀▀░░░▀█▀░█▀█░█░█░█▀▀░█▀█░▀█▀░█▀█░█▀▄░█░█
+            ░█▀▄░█░█░█▀▄░█░█░░█░░░█░░█░░░▀▀█░░░█▀▀░█▀█░█▀▄░░█░░▀▀█░░░░█░░█░█░▀▄▀░█▀▀░█░█░░█░░█░█░█▀▄░░█░
+            ░▀░▀░▀▀▀░▀▀░░▀▀▀░░▀░░▀▀▀░▀▀▀░▀▀▀░░░▀░░░▀░▀░▀░▀░░▀░░▀▀▀░░░▀▀▀░▀░▀░░▀░░▀▀▀░▀░▀░░▀░░▀▀▀░▀░▀░░▀░   
+        """
+        + RESET
+        );
+    }
+
+   public static void mainMenu() {
+    line();
+       System.out.println(
+        addPart() + "\n" +
+        inv() + "\n" +
+        search() + "\n" +
+        update() + "\n" +
+        delete() + "\n" +
+        preview() + "\n" +
+        save_exit() + "\n"
+       );
+    line();
+}
+
+    
+
+
+    public static String addPart(){
+       return BOLD + BRIGHT_WHITE +
+        """
+═║    ╔═║╔═ ╔═   ╔═║╔═║╔═║═╔╝                    
+ ║    ╔═║║ ║║ ║  ╔═╝╔═║╔╔╝ ║                     
+══╝╝  ╝ ╝══ ══   ╝  ╝ ╝╝ ╝ ╝   
+
+        """
+        + RESET;
+    }
+
+    public static String inv(){
+       return BOLD + BRIGHT_WHITE +
+        """
+══║   ╝╔═ ║ ║╔═╝╔═ ═╔╝╔═║╔═║║ ║                  
+╔═╝   ║║ ║║ ║╔═╝║ ║ ║ ║ ║╔╔╝═╔╝                  
+══╝╝  ╝╝ ╝ ╝ ══╝╝ ╝ ╝ ══╝╝ ╝ ╝    
+
+        """
+        + RESET;
+    }
+
+     public static String search(){
+       return BOLD + BRIGHT_WHITE +
+        """
+══║   ╔═╝╔═╝╔═║╔═║╔═╝║ ║  ╔═║╔═║╔═║═╔╝           
+══║   ══║╔═╝╔═║╔╔╝║  ╔═║  ╔═╝╔═║╔╔╝ ║            
+══╝╝  ══╝══╝╝ ╝╝ ╝══╝╝ ╝  ╝  ╝ ╝╝ ╝ ╝ 
+
+        """
+        + RESET;
+    }
+
+     public static String update(){
+       return BOLD + BRIGHT_WHITE +
+        """
+║ ║   ║ ║╔═║╔═ ╔═║═╔╝╔═╝  ╔═║ ║ ║╔═║╔═ ═╔╝╝═╔╝║ ║
+══║   ║ ║╔═╝║ ║╔═║ ║ ╔═╝  ║ ║ ║ ║╔═║║ ║ ║ ║ ║ ═╔╝
+  ╝╝  ══╝╝  ══ ╝ ╝ ╝ ══╝  ═══╝══╝╝ ╝╝ ╝ ╝ ╝ ╝  ╝ 
+
+        """
+        + RESET;
+
+    }
+
+     public static String delete(){
+       return BOLD + BRIGHT_WHITE +
+        """
+╔═╝   ╔═ ╔═╝║  ╔═╝═╔╝╔═╝  ╔═║╔═║╔═║═╔╝           
+══║   ║ ║╔═╝║  ╔═╝ ║ ╔═╝  ╔═╝╔═║╔╔╝ ║            
+══╝╝  ══ ══╝══╝══╝ ╝ ══╝  ╝  ╝ ╝╝ ╝ ╝     
+
+        """
+        + RESET;
+    }
+
+     public static String preview(){
+       return BOLD + BRIGHT_WHITE +
+        """
+╔═╝   ╔═║╔═║╔═╝║ ║╝╔═╝║║║  ╔═║╔═║╔═║═╔╝          
+╔═║   ╔═╝╔╔╝╔═╝║ ║║╔═╝║║║  ╔═╝╔═║╔╔╝ ║           
+══╝╝  ╝  ╝ ╝══╝ ╝ ╝══╝══╝  ╝  ╝ ╝╝ ╝ ╝  
+
+        """
+        + RESET;
+    }
+
+     public static String save_exit(){
+       return BOLD + BRIGHT_WHITE +
+        """
+╔═║ ╔═╝╔═║║ ║╔═╝  ╔╝║   ╔═╝║ ║╝═╔╝               
+  ║ ══║╔═║║ ║╔═╝  ║═╔╝  ╔═╝ ╝ ║ ║                
+  ╝╝══╝╝ ╝ ╝ ══╝  ══╝   ══╝╝ ╝╝ ╝         
+
+        """
+        + RESET;
+    }
+
+         public static void choice(){
+            enter(
+
+            """
+                    ╔═╗┌┐┌┌┬┐┌─┐┬─┐  ┬ ┬┌─┐┬ ┬┬─┐  ┌─┐┬ ┬┌─┐┬┌─┐┌─┐
+                    ║╣ │││ │ ├┤ ├┬┘  └┬┘│ ││ │├┬┘  │  ├─┤│ │││  ├┤  ╝
+                    ╚═╝┘└┘ ┴ └─┘┴└─   ┴ └─┘└─┘┴└─  └─┘┴ ┴└─┘┴└─┘└─┘ ╝ """ 
+                    + "   "
+
+            );
     }
 }

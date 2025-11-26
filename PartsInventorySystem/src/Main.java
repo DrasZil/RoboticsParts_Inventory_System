@@ -11,22 +11,11 @@ public class Main {
 
         while(true){
             ConsoleUtils.clearConsole();
-            style.title("Welcome to the Robotics Parts Inventory System");
+            style.mainTitle();
 
-           System.out.println(
-            style.YELLOW + "[1] " + style.CYAN + "Add Part\n" +
-            style.YELLOW + "[2] " + style.CYAN + "View Inventory\n" +
-            style.YELLOW + "[3] " + style.CYAN + "Search Part\n" +
-            style.YELLOW + "[4] " + style.CYAN + "Update Quantity\n" +
-            style.YELLOW + "[5] " + style.CYAN + "Delete Part\n" +
-            style.YELLOW + "[6] " + style.CYAN + "Preview Parts\n" +
-            style.YELLOW + "[7] " + style.CYAN + "Save and Exit" +
-            style.RESET
-            );
+            style.mainMenu();
 
-
-
-            style.enter("Enter your choice: ");
+            style.choice();
 
             int choice = input.nextInt();
             input.nextLine();
@@ -166,7 +155,7 @@ public class Main {
                 case 6 -> {
                     style.title("This is a preview of the parts to be added to the Main Inventory");
                     System.out.println(
-                        style.YELLOW + "[1] " + style.CYAN + "Preview Parts\n" +
+                        style.YELLOW + " " + style.CYAN + "Preview Parts\n" +
                         style.YELLOW + "[2] " + style.CYAN + "Edit Part\n" +
                         style.YELLOW + "[3] " + style.CYAN + "Delete Part" +
                         style.RESET
