@@ -155,7 +155,7 @@ public class Main {
                 case 6 -> {
                     style.title("This is a preview of the parts to be added to the Main Inventory");
                     System.out.println(
-                        style.YELLOW + " " + style.CYAN + "Preview Parts\n" +
+                        style.YELLOW + "[1] " + style.CYAN + "Preview Parts\n" +
                         style.YELLOW + "[2] " + style.CYAN + "Edit Part\n" +
                         style.YELLOW + "[3] " + style.CYAN + "Delete Part" +
                         style.RESET
