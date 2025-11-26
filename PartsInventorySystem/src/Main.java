@@ -8,34 +8,17 @@ public class Main {
         //initialize the Inventory class to be called as inventory
         Inventory inventory = new Inventory();
         Scanner input = new Scanner(System.in);
-        int choice;
 
         while(true){
             ConsoleUtils.clearConsole();
-            style.title("Welcome to the Robotics Parts Inventory System");
+            style.mainTitle();
 
-           System.out.println(
-            style.YELLOW + "[1] " + style.CYAN + "Add Part\n" +
-            style.YELLOW + "[2] " + style.CYAN + "View Inventory\n" +
-            style.YELLOW + "[3] " + style.CYAN + "Search Part\n" +
-            style.YELLOW + "[4] " + style.CYAN + "Update Quantity\n" +
-            style.YELLOW + "[5] " + style.CYAN + "Delete Part\n" +
-            style.YELLOW + "[6] " + style.CYAN + "Preview Parts\n" +
-            style.YELLOW + "[7] " + style.CYAN + "Save and Exit" +
-            style.RESET
-            );
+            style.mainMenu();
 
-            style.enter("Enter your choice: ");
+            style.choice();
 
-            // Input validation for the main menu choice
-            if (input.hasNextInt()) {
-                choice = input.nextInt();
-                input.nextLine();
-            } else {
-                style.error("Invalid choice. Please try again.");
-                input.nextLine();
-                continue;
-            }
+            int choice = input.nextInt();
+            input.nextLine();
 
             switch(choice){
                 case 1 -> {
@@ -44,7 +27,7 @@ public class Main {
                         style.enter("Enter Part Name: ");
                         name = input.nextLine();
                         if (!inventory.nameExists(name)) {
-                          break;
+                     break;
                         } else {
                             style.warning("Name already exists. Please enter a different name.");
                         }
@@ -55,7 +38,7 @@ public class Main {
                         style.enter("Enter Part Number: ");
                         partNumber = input.nextLine();
                         if (!inventory.partNumberExists(partNumber)) {
-                          break;
+                     break;
                         } else {
                             style.warning("Part Number already exists. Please enter a part number.");
                         }
@@ -96,7 +79,7 @@ public class Main {
                         } else {
                             style.error("Invalid input. Please enter a number.");
                             input.nextLine();
-                        } 
+                        }  
                     }
 
                     double exchangeRate = 58.67; 
@@ -130,7 +113,7 @@ public class Main {
                     originalPrice, //USD value if USD was selected
                     originalCurrency, //USD or PHP
                     category, description);
-                    
+                  
                     inventory.addPart(newPart);
                     
                     style.success("Part added successfully!");
@@ -156,35 +139,10 @@ public class Main {
                     ConsoleUtils.pause(input);
                 }
                 case 4 -> {
-                    String updatePartNumber = "";
-                    int newQuantity = -1;
-                    
-                    while (true) {
-                        style.enter("Enter Part Number to update quantity: ");
-                        
-                        if (input.hasNextInt()) {
-                            updatePartNumber = String.valueOf(input.nextInt());
-                            input.nextLine();
-                            break;
-                        } else {
-                            System.out.println("Invalid choice. Please try again.");
-                            input.nextLine();
-                        }
-                    }
-
-                    while (true) {
-                        style.enter("Enter new Quantity: ");
-
-                        if (input.hasNextInt()) {
-                            newQuantity = input.nextInt();
-                            input.nextLine();
-                            break;
-                        } else {
-                            System.out.println("Invalid choice. Please try again.");
-                            input.nextLine();
-                        }
-                    }
-                    
+                    style.enter("Enter Part Number to update quantity: ");
+                    String updatePartNumber = input.nextLine();
+                    style.enter("Enter new Quantity: ");
+                    int newQuantity = input.nextInt();
                     inventory.updateQuantity(updatePartNumber, newQuantity);
                     ConsoleUtils.pause(input);
                 }
@@ -195,94 +153,58 @@ public class Main {
                     ConsoleUtils.pause(input);
                 }
                 case 6 -> {
-                    int res = 0;
-                    boolean runSubMenu = true;
+                    style.title("This is a preview of the parts to be added to the Main Inventory");
+                    System.out.println(
+                        style.YELLOW + "[1] " + style.CYAN + "Preview Parts\n" +
+                        style.YELLOW + "[2] " + style.CYAN + "Edit Part\n" +
+                        style.YELLOW + "[3] " + style.CYAN + "Delete Part" +
+                        style.RESET
+                    );
+                    style.enter("Enter your choice: ");
 
-                    while (runSubMenu) {
-                        style.title("This is a preview of the parts to be added to the Main Inventory");
-                        System.out.println(
-                            style.YELLOW + "[1] " + style.CYAN + "Preview Parts\n" +
-                            style.YELLOW + "[2] " + style.CYAN + "Edit Part\n" +
-                            style.YELLOW + "[3] " + style.CYAN + "Delete Part\n" +
-                            style.YELLOW + "[4] " + style.RED + "Cancel Preview (Return to Main Menu)" +
-                            style.RESET
-                        );
-                       style.enter("Enter your choice: ");
+                    int res = input.nextInt();
+                    input.nextLine();
+                    ConsoleUtils.pause(input);
 
-                        if (input.hasNextInt()) {
-                            res = input.nextInt();
-                            input.nextLine();
-
-                            switch(res) {
-                                case 1 -> {
-                                    style.line();
-                                    inventory.preview();
-                                    style.line();
-                                    ConsoleUtils.pause(input);
-                                }
-                                case 2 -> {
-                                    inventory.preview();
-                                    style.line();
-                                    style.enter("Select number u want to edit: ");
-
-                                    if (input.hasNextInt()) {
-                                        int pnum = input.nextInt();
-                                        input.nextLine();
-                                        inventory.editPart(pnum);
-                                    } else {
-                                        System.out.println("\n!! Invalid part number. Please enter a number.");
-                                        input.nextLine();
-                                    }
-                                    ConsoleUtils.pause(input);
-                                }
-                                case 3 -> {
-                                    inventory.preview();
-                                    style.line();
-                                    style.enter("Select number u want to remove: ");
-
-                                    if (input.hasNextInt()) {
-                                        int pnum = input.nextInt();
-                                        input.nextLine();
-                                        inventory.deleteprev(pnum);
-                                    } else {
-                                        System.out.println("\n!! Invalid part number. Please enter a number.");
-                                        input.nextLine();
-                                    }
-                                    ConsoleUtils.pause(input);
-                                }
-                                case 4 -> {
-                                    System.out.println("\n>> Preview cancelled. Returning to main menu.");
-                                    runSubMenu = false;
-                                    ConsoleUtils.pause(input);
-                                }
-                                default -> {
-                                    System.out.println("\n!! Invalid option: " + res + ". Returning to main menu.");
-                                    ConsoleUtils.pause(input);
-                                }
-                            }
-                        } else {
-                            System.out.println("\n!! Invalid option !! \nPlease enter a number.");
-                            input.nextLine();
+                    switch(res) {
+                    
+                        case 1 -> {
+                            style.line();
+                            inventory.preview();
+                            style.line();
                             ConsoleUtils.pause(input);
                         }
-                    }
+                        case 2 -> {
+                            inventory.preview();
+                            style.line();
+                            style.enter("Select number u want to edit: ");
+                            input.nextLine();
+                            int pnum = input.nextInt();
+                     
+                            inventory.editPart(pnum);
+                            ConsoleUtils.pause(input);
+
+                        }
+                        case 3 -> {
+                            inventory.preview();
+                            style.line();
+                            style.enter("Select number u want to remove: ");
+                            input.nextLine();
+                            int pnum = input.nextInt();
+                            inventory.deleteprev(pnum);
+                            ConsoleUtils.pause(input);
+                        }   
+                    }   
+                    
+
+
                 }
                 case 7 -> {
                     inventory.saveToFile();
                     ConsoleUtils.pause(input);
+                    style.enter("Do you want to continue? (Y/N): ");
+                    String continueChoice = input.nextLine().trim().toUpperCase();
                     
-                    String continueChoice;
-                    
-                    do {
-                        style.enter("Do you want to continue? (Y/N): ");
-                        continueChoice = input.nextLine().trim().toUpperCase();
-
-                        if (!continueChoice.equals("Y") && !continueChoice.equals("N")) {
-                            System.out.println("Please enter Y to continue or N to exit:");
-                        }
-
-                    } while (!continueChoice.equals("Y") && !continueChoice.equals("N"));
-
                     if (continueChoice.equals("N")) {
                         System.out.println(style.YELLOW + "Exiting..." + style.RESET);
                         input.close();
