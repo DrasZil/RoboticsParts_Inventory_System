@@ -8,7 +8,7 @@ public class Main {
         //initialize the Inventory class to be called as inventory
         Inventory inventory = new Inventory();
         Scanner input = new Scanner(System.in);
-        int choice = -1;
+        int choice;
 
         while(true){
             ConsoleUtils.clearConsole();
