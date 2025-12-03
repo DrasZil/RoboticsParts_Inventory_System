@@ -185,7 +185,7 @@ public class Main {
                     ConsoleUtils.pause(input);
                 }
                 case 6 -> {
-                    int res = 0;
+                    int res;
                     boolean runSubMenu = true;
 
                     while (runSubMenu) {
@@ -218,13 +218,36 @@ public class Main {
                                     if (input.hasNextInt()) {
                                         int pnum = input.nextInt();
                                         input.nextLine();
-                                        inventory.editPart(pnum);
+
+                                        String confirmation;
+                                        boolean confirmed = false;
+
+                                        do {
+                                            style.enter("You selected part " + pnum + " to edit. Do you want to proceed? (yes/no): ");
+                                            confirmation = input.nextLine().trim().toLowerCase();
+
+                                            switch (confirmation) {
+                                                case "yes" -> confirmed = true;
+                                                case "no" -> {
+                                                    confirmed = false;
+                                                    break;
+                                                }
+                                                default -> System.out.println("\n!! Invalid input. Please type 'yes' or 'no'.");
+                                            }
+                                        } while (!confirmation.equals("yes") && !confirmation.equals("no"));
+
+                                        if (confirmed) {
+                                            inventory.editPart(pnum);
+                                        } else {
+                                            System.out.println("\n!! Edit cancelled. Returning to main options.");
+                                        }
                                     } else {
                                         System.out.println("\n!! Invalid part number. Please enter a number.");
                                         input.nextLine();
                                     }
                                     ConsoleUtils.pause(input);
                                 }
+
                                 case 3 -> {
                                     inventory.preview();
                                     style.line();
@@ -233,7 +256,29 @@ public class Main {
                                     if (input.hasNextInt()) {
                                         int pnum = input.nextInt();
                                         input.nextLine();
-                                        inventory.deleteprev(pnum);
+
+                                        String confirmation;
+                                        boolean confirmed = false;
+
+                                        do {
+                                            style.enter("You selected part " + pnum + " to remove. Do you want to proceed? (yes/no): ");
+                                            confirmation = input.nextLine().trim().toLowerCase();
+
+                                            switch (confirmation) {
+                                                case "yes" -> confirmed = true;
+                                                case "no" -> {
+                                                    confirmed = false;
+                                                    break;
+                                                }
+                                                default -> System.out.println("\n!! Invalid input. Please type 'yes' or 'no'.");
+                                            }
+                                        } while (!confirmation.equals("yes") && !confirmation.equals("no"));
+
+                                        if (confirmed) {
+                                            inventory.deleteprev(pnum);
+                                        } else {
+                                            System.out.println("\n!! Removal cancelled. Returning to main options.");
+                                        }
                                     } else {
                                         System.out.println("\n!! Invalid part number. Please enter a number.");
                                         input.nextLine();
