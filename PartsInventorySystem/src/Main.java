@@ -16,7 +16,7 @@ public class Main {
 
             style.mainMenu();
 
-            style.choice();
+            style.enter("Enter your choice: ");
 
             // Input validation for the main menu choice
             if (input.hasNextInt()) {
@@ -189,14 +189,9 @@ public class Main {
                     boolean runSubMenu = true;
 
                     while (runSubMenu) {
-                        style.title("This is a preview of the parts to be added to the Main Inventory");
-                        System.out.println(
-                            style.YELLOW + "[1] " + style.CYAN + "Preview Parts\n" +
-                            style.YELLOW + "[2] " + style.CYAN + "Edit Part\n" +
-                            style.YELLOW + "[3] " + style.CYAN + "Delete Part\n" +
-                            style.YELLOW + "[4] " + style.RED + "Cancel Preview (Return to Main Menu)" +
-                            style.RESET
-                        );
+                        style.subTitle();
+                        style.subMenu();
+                      
                        style.enter("Enter your choice: ");
 
                         if (input.hasNextInt()) {
