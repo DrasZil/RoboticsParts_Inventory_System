@@ -11,11 +11,11 @@ public class Main {
         int choice;
 
         while(true){
+            //reduces clutter
             ConsoleUtils.clearConsole();
+
             style.mainTitle();
-
             style.mainMenu();
-
             style.enter("Enter your choice: ");
 
             // Input validation for the main menu choice
@@ -23,10 +23,13 @@ public class Main {
                 choice = input.nextInt();
                 input.nextLine();
             } else {
+
                 style.error("Invalid choice. Please try again.");
                 input.nextLine();
                 continue;
             }
+
+
             switch(choice){
                 case 1 -> {
                     String name;
@@ -128,10 +131,12 @@ public class Main {
                     style.line();
                     ConsoleUtils.pause(input);
                 }
+                // View Parts inside Inventory
                 case 2 -> {
                     inventory.viewAllParts();
                     ConsoleUtils.pause(input);
                 }
+                // Search for Part
                 case 3 -> {
                     style.enter("Enter the Name of part or part Number to search: ");
                     String query = input.nextLine();
@@ -145,6 +150,7 @@ public class Main {
                     }
                     ConsoleUtils.pause(input);
                 }
+                // Quantity Update Option
                 case 4 -> {
                     String updatePartNumber = "";
                     int newQuantity = -1;
@@ -152,7 +158,7 @@ public class Main {
                     while (true) {
                         style.enter("Enter Part Number to update quantity: ");
                         
-                        if (input.hasNextInt()) {
+                        if (input.hasNextInt()) { // checks for integer input and find the part number
                             updatePartNumber = String.valueOf(input.nextInt());
                             input.nextLine();
                             break;
@@ -165,7 +171,7 @@ public class Main {
                     while (true) {
                         style.enter("Enter new Quantity: ");
 
-                        if (input.hasNextInt()) {
+                        if (input.hasNextInt()) { // checks for integer input and will update the new quantity
                             newQuantity = input.nextInt();
                             input.nextLine();
                             break;
@@ -178,12 +184,14 @@ public class Main {
                     inventory.updateQuantity(updatePartNumber, newQuantity);
                     ConsoleUtils.pause(input);
                 }
+                // Delete Part
                 case 5 -> {
                     style.enter("Enter Part Number to delete: ");
                     String deletePartNumber = input.nextLine();
                     inventory.deletePart(deletePartNumber);
                     ConsoleUtils.pause(input);
                 }
+                // Preview Menu
                 case 6 -> {
                     int res;
                     boolean runSubMenu = true;
@@ -199,24 +207,27 @@ public class Main {
                             input.nextLine();
 
                             switch(res) {
+                                // Preview Case //
                                 case 1 -> {
                                     style.line();
                                     inventory.preview();
                                     style.line();
                                     ConsoleUtils.pause(input);
                                 }
+                                // Edit Case //
                                 case 2 -> {
                                     inventory.preview();
                                     style.line();
                                     style.enter("Select number u want to edit: ");
 
-                                    if (input.hasNextInt()) {
+                                    if (input.hasNextInt()) { // to require an integer input
                                         int pnum = input.nextInt();
                                         input.nextLine();
 
                                         String confirmation;
                                         boolean confirmed = false;
 
+                                        // Confirmation of changes 
                                         do {
                                             style.enter("You selected part " + pnum + " to edit. Do you want to proceed? (yes/no): ");
                                             confirmation = input.nextLine().trim().toLowerCase();
@@ -229,7 +240,7 @@ public class Main {
                                                 }
                                                 default -> System.out.println("\n!! Invalid input. Please type 'yes' or 'no'.");
                                             }
-                                        } while (!confirmation.equals("yes") && !confirmation.equals("no"));
+                                        } while (!confirmation.equals("yes") && !confirmation.equals("no")); // Checks and requires for "yes" or "no" input
 
                                         if (confirmed) {
                                             inventory.editPart(pnum);
@@ -243,18 +254,20 @@ public class Main {
                                     ConsoleUtils.pause(input);
                                 }
 
+                                // Delete/Remove Part Case //
                                 case 3 -> {
                                     inventory.preview();
                                     style.line();
                                     style.enter("Select number u want to remove: ");
 
-                                    if (input.hasNextInt()) {
+                                    if (input.hasNextInt()) { // to require an integer input
                                         int pnum = input.nextInt();
                                         input.nextLine();
 
                                         String confirmation;
                                         boolean confirmed = false;
 
+                                        // Confirmation of changes
                                         do {
                                             style.enter("You selected part " + pnum + " to remove. Do you want to proceed? (yes/no): ");
                                             confirmation = input.nextLine().trim().toLowerCase();
@@ -267,7 +280,7 @@ public class Main {
                                                 }
                                                 default -> System.out.println("\n!! Invalid input. Please type 'yes' or 'no'.");
                                             }
-                                        } while (!confirmation.equals("yes") && !confirmation.equals("no"));
+                                        } while (!confirmation.equals("yes") && !confirmation.equals("no")); // Checks and requires for "yes" or "no" input
 
                                         if (confirmed) {
                                             inventory.deleteprev(pnum);
@@ -280,6 +293,7 @@ public class Main {
                                     }
                                     ConsoleUtils.pause(input);
                                 }
+                                // Cancel Preview Case //
                                 case 4 -> {
                                     System.out.println("\n>> Preview cancelled. Returning to main menu.");
                                     runSubMenu = false;
@@ -297,6 +311,7 @@ public class Main {
                         }
                     }
                 }
+                // Save & Exit //
                 case 7 -> {
                     inventory.saveToFile();
                     ConsoleUtils.pause(input);
@@ -307,7 +322,7 @@ public class Main {
                         style.enter("Do you want to continue? (Y/N): ");
                         continueChoice = input.nextLine().trim().toUpperCase();
 
-                        if (!continueChoice.equals("Y") && !continueChoice.equals("N")) {
+                        if (!continueChoice.equals("Y") && !continueChoice.equals("N")) { // Checks and requires for "Y" or "N" input
                             System.out.println("Please enter Y to continue or N to exit:");
                         }
 

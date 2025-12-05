@@ -1,0 +1,10 @@
+====================================
+Part Number : 18
+Name        : Oliver
+Quantity    : -2
+Price       : PHP 5667000
+(Original   : USD 100000.0)
+Category    : Human
+Description : Human
+====================================
+

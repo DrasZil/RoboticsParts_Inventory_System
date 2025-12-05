@@ -7,7 +7,7 @@ public final class Inventory {
     //create a list to store parts
         private List<Part> loadedPartsList; //parts loaded from file
         private List<Part> tempPartsList; //parts added during runtime/current session
-        private final String FILE_NAME = "C:\\Users\\Admin\\Documents\\GitHub\\RoboticsParts_Inventory_System\\PartsInventorySystem\\src\\inventory_data.txt";
+        private final String FILE_NAME = "E:\\College Prog\\Java_Final_Group_Project\\RoboticsParts_Inventory_System\\PartsInventorySystem\\src\\Inventory.javay";
 
     //creating a constructor
     public Inventory(){
@@ -33,26 +33,6 @@ public final class Inventory {
         }
     }
 
-    // Check for Duplicates in Name 
-    public boolean nameExists(String name){
-        for (Part part : loadedPartsList){
-            if(part.getName().equalsIgnoreCase(name)){
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // Check for Duplicates in Part Number
-    public boolean partNumberExists(String partNumber){
-        for (Part part : loadedPartsList){
-            if(part.getPartNumber().equalsIgnoreCase(partNumber)){
-                return true;
-            }
-        }
-        return false;
-    }
-
     //Search parts by name or part number in loadedPartsList
     public Part searchPart(String query){
         for (Part part : loadedPartsList){
@@ -71,7 +51,7 @@ public final class Inventory {
         return null;
     }
 
-    //updating the quantity in loadedPartsList
+        //updating the quantity in loadedPartsList
     public void updateQuantity(String partNumber, int newQuantity){
         Part part = searchPart(partNumber);
         if (part != null){
@@ -96,6 +76,26 @@ public final class Inventory {
             style.error("Part not found.");
         }
     }
+    
+    // Check for Duplicates in Name 
+    public boolean nameExists(String name){
+        for (Part part : loadedPartsList){
+            if(part.getName().equalsIgnoreCase(name)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    // Check for Duplicates in Part Number
+    public boolean partNumberExists(String partNumber){
+        for (Part part : loadedPartsList){
+            if(part.getPartNumber().equalsIgnoreCase(partNumber)){
+                return true;
+            }
+        }
+        return false;
+    }
 
     //this allows previewing the list of things to be added to the main txt file
     //preview from tempPartsList
@@ -112,6 +112,7 @@ public final class Inventory {
         }
     }
     // removing parts in the preview function
+
     public void deleteprev(int num){
         //fixed bug, indexOf(Num) to remoeve(num) num is not a part object
         if(num >= 0 && num < tempPartsList.size()){
@@ -292,8 +293,6 @@ public final class Inventory {
         }
     }
         
-
-
 
     /*
 parts: A list to store all parts.
